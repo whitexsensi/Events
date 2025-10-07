@@ -186,19 +186,20 @@
   </div>
 
   <script>
+// Updated bundles data with direct root paths
 const bundlesData = [
-  { name: 'Red Criminal Bundle', image: '/Red Criminal Bundle.png', popular: true },
-  { name: 'Yellow Criminal Bundle', image: '/Yellow Criminal Bundle.png', popular: true },
-  { name: 'Cobra Rage Bundle', image: '/Cobra Rage Bundle.png', popular: true },
-  { name: 'Bushido Bundle', image: '/Bushido Bundle.png' },
-  { name: 'Artic Blue Bundle', image: '/Artic Blue Bundle.png' },
-  { name: 'Bunny Ringleader Bundle', image: '/Bunny Ringleader Bundle.png' },
-  { name: 'Bunny Warrior Bundle', image: '/Bunny Warrior Bundle.png' },
-  { name: 'Galatic Bunny Bundle', image: '/Galatic Bunny Bundle.png' },
-  { name: 'Genos Suit Bundle', image: '/Genos Suit Bundle.png' },
-  { name: 'Saitama Bundle', image: '/Saitama Bundle.png' },
-  { name: 'The Streets Bundle', image: '/The Streets Bundle.png' },
-  { name: 'Zombiefied Samurai Bundle', image: '/Zombiefied Samurai Bundle.png' }
+  { name: 'Red Criminal Bundle', image: 'Red Criminal Bundle.png', popular: true },
+  { name: 'Yellow Criminal Bundle', image: 'Yellow Criminal Bundle.png', popular: true },
+  { name: 'Cobra Rage Bundle', image: 'Cobra Rage Bundle.png', popular: true },
+  { name: 'Bushido Bundle', image: 'Bushido Bundle.png' },
+  { name: 'Artic Blue Bundle', image: 'Artic Blue Bundle.png' },
+  { name: 'Bunny Ringleader Bundle', image: 'Bunny Ringleader Bundle.png' },
+  { name: 'Bunny Warrior Bundle', image: 'Bunny Warrior Bundle.png' },
+  { name: 'Galatic Bunny Bundle', image: 'Galatic Bunny Bundle.png' },
+  { name: 'Genos Suit Bundle', image: 'Genos Suit Bundle.png' },
+  { name: 'Saitama Bundle', image: 'Saitama Bundle.png' },
+  { name: 'The Streets Bundle', image: 'The Streets Bundle.png' },
+  { name: 'Zombiefied Samurai Bundle', image: 'Zombiefied Samurai Bundle.png' }
 ];
 
     // Sort: popular first
@@ -231,7 +232,7 @@ const bundlesData = [
         const card=document.createElement('div');
         card.className='bundle-card';
         card.innerHTML=`
-          <img src="${b.image}" alt="${b.name}" class="bundle-image">
+          <img src="${b.image}" alt="${b.name}" class="bundle-image" onerror="this.style.backgroundColor='#1a1c12'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<span style=color:var(--accent)>${b.name}</span>'">
           <h3>${b.name}</h3>
           <button class="btn" onclick="openModal(${i})">Claim Now</button>
         `;
@@ -255,13 +256,26 @@ const bundlesData = [
 
     function showCongrats(uid){
       document.getElementById('congratsBackdrop').style.display='flex';
-      document.getElementById('rewardBox').innerHTML=`<img src="${selectedBundle.image}" alt="">`;
+      document.getElementById('rewardBox').innerHTML=`<img src="${selectedBundle.image}" alt="${selectedBundle.name}" onerror="this.style.backgroundColor='#1a1c12'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='<span style=color:var(--accent);font-size:18px;font-weight:bold>${selectedBundle.name}</span>'">`;
       document.getElementById('rewardName').textContent=selectedBundle.name;
       document.getElementById('rewardMsg').textContent=`Your bundle has been sent to UID: ${uid}`;
     }
 
     document.getElementById('awesomeBtn').addEventListener('click',()=>{
       document.getElementById('congratsBackdrop').style.display='none';
+    });
+
+    // Close modal when clicking outside
+    document.getElementById('modalBackdrop').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
+
+    document.getElementById('congratsBackdrop').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
     });
   </script>
 </body>
