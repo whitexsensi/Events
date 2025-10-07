@@ -186,22 +186,22 @@
   </div>
 
   <script>
+    // ✅ Image paths updated — directly from /public folder
     const bundlesData = [
-      { name: 'Red Criminal Bundle', image: 'bundles/Red Criminal Bundle.png', popular: true },
-      { name: 'Yellow Criminal Bundle', image: 'bundles/Yellow Criminal Bundle.png', popular: true },
-      { name: 'Cobra Rage Bundle', image: 'bundles/Cobra Rage Bundle.png', popular: true },
-      { name: 'Bushido Bundle', image: 'bundles/Bushido Bundle.png' },
-      { name: 'Artic Blue Bundle', image: 'bundles/Artic Blue Bundle.png' },
-      { name: 'Bunny Ringleader Bundle', image: 'bundles/Bunny Ringleader Bundle.png' },
-      { name: 'Bunny Warrior Bundle', image: 'bundles/Bunny Warrior Bundle.png' },
-      { name: 'Galatic Bunny Bundle', image: 'bundles/Galatic Bunny Bundle.png' },
-      { name: 'Genos Suit Bundle', image: 'bundles/Genos Suit Bundle.png' },
-      { name: 'Saitama Bundle', image: 'bundles/Saitama Bundle.png' },
-      { name: 'The Streets Bundle', image: 'bundles/The Streets Bundle.png' },
-      { name: 'Zombiefied Samurai Bundle', image: 'bundles/Zombiefied Samurai Bundle.png' }
+      { name: 'Red Criminal Bundle', image: 'Red Criminal Bundle.png', popular: true },
+      { name: 'Yellow Criminal Bundle', image: 'Yellow Criminal Bundle.png', popular: true },
+      { name: 'Cobra Rage Bundle', image: 'Cobra Rage Bundle.png', popular: true },
+      { name: 'Bushido Bundle', image: 'Bushido Bundle.png' },
+      { name: 'Artic Blue Bundle', image: 'Artic Blue Bundle.png' },
+      { name: 'Bunny Ringleader Bundle', image: 'Bunny Ringleader Bundle.png' },
+      { name: 'Bunny Warrior Bundle', image: 'Bunny Warrior Bundle.png' },
+      { name: 'Galatic Bunny Bundle', image: 'Galatic Bunny Bundle.png' },
+      { name: 'Genos Suit Bundle', image: 'Genos Suit Bundle.png' },
+      { name: 'Saitama Bundle', image: 'Saitama Bundle.png' },
+      { name: 'The Streets Bundle', image: 'The Streets Bundle.png' },
+      { name: 'Zombiefied Samurai Bundle', image: 'Zombiefied Samurai Bundle.png' }
     ];
 
-    // Sort: popular first
     const sortedBundles = [...bundlesData].sort((a,b) => (b.popular||0) - (a.popular||0));
 
     function showPage(id){
