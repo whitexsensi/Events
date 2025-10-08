@@ -176,14 +176,12 @@
       gap: 24px;
     }
     .bundle-card {
-      background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      background: rgba(255,255,255,0.05);
       padding: 20px;
-      border-radius: 20px;
+      border-radius: 16px;
       text-align: center;
       border: 1px solid rgba(255,255,255,0.08);
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
+      transition: all 0.3s ease;
     }
     .bundle-card::before {
       content: '';
@@ -195,18 +193,16 @@
       background: linear-gradient(90deg, var(--diyagold), var(--accent-2));
     }
     .bundle-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--diyagold);
-      box-shadow: 0 12px 30px rgba(255, 157, 0, 0.2);
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 25px rgba(245,158,11,0.15);
     }
     .bundle-image {
       width: 100%;
       height: 260px;
       border-radius: 12px;
-      object-fit: contain;
+      object-fit: cover;
       margin-bottom: 16px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.05);
     }
     .popular-badge {
       position: absolute;
@@ -222,23 +218,19 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(2,6,23,0.9);
+      background: rgba(2,6,23,0.85);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 100;
-      animation: fadeIn 0.3s ease;
     }
     .modal {
-      width: 460px;
-      max-width: 90vw;
-      background: linear-gradient(145deg, rgba(40,20,70,0.95), rgba(20,10,40,0.98));
-      padding: 28px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 157, 0, 0.2);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-      backdrop-filter: blur(15px);
-      animation: modalAppear 0.4s ease;
+      width: 440px;
+      background: rgba(30,30,20,0.95);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(245,158,11,0.2);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
     }
     .congrats {
       display: flex;
@@ -420,20 +412,20 @@
 
   <script>
     // Free Fire themed bundles
-    const bundlesData = [
-      { name: 'Red Criminal Bundle', image: '/Red Criminal Bundle.png', popular: true },
-      { name: 'Yellow Criminal Bundle', image: '/Yellow Criminal Bundle.png', popular: true },
-      { name: 'Cobra Rage Bundle', image: '/Cobra Rage Bundle.png', popular: true },
-      { name: 'Bushido Bundle', image: '/Bushido Bundle.png' },
-      { name: 'Artic Blue Bundle', image: '/Artic Blue Bundle.png' },
-      { name: 'Bunny Ringleader Bundle', image: '/Bunny Ringleader Bundle.png' },
-      { name: 'Bunny Warrior Bundle', image: '/Bunny Warrior Bundle.png' },
-      { name: 'Galatic Bunny Bundle', image: '/Galatic Bunny Bundle.png' },
-      { name: 'Genos Suit Bundle', image: '/Genos Suit Bundle.png' },
-      { name: 'Saitama Bundle', image: '/Saitama Bundle.png' },
-      { name: 'The Streets Bundle', image: '/The Streets Bundle.png' },
-      { name: 'Zombiefied Samurai Bundle', image: '/Zombiefied Samurai Bundle.png' }
-    ];
+const bundlesData = [
+  { name: 'Red Criminal Bundle', image: '/Red Criminal Bundle.png', popular: true },
+  { name: 'Yellow Criminal Bundle', image: '/Yellow Criminal Bundle.png', popular: true },
+  { name: 'Cobra Rage Bundle', image: '/Cobra Rage Bundle.png', popular: true },
+  { name: 'Bushido Bundle', image: '/Bushido Bundle.png' },
+  { name: 'Artic Blue Bundle', image: '/Artic Blue Bundle.png' },
+  { name: 'Bunny Ringleader Bundle', image: '/Bunny Ringleader Bundle.png' },
+  { name: 'Bunny Warrior Bundle', image: '/Bunny Warrior Bundle.png' },
+  { name: 'Galatic Bunny Bundle', image: '/Galatic Bunny Bundle.png' },
+  { name: 'Genos Suit Bundle', image: '/Genos Suit Bundle.png' },
+  { name: 'Saitama Bundle', image: '/Saitama Bundle.png' },
+  { name: 'The Streets Bundle', image: '/The Streets Bundle.png' },
+  { name: 'Zombiefied Samurai Bundle', image: '/Zombiefied Samurai Bundle.png' }
+];
 
     // Sort: popular first
     const sortedBundles = [...bundlesData].sort((a,b) => (b.popular||0) - (a.popular||0));
