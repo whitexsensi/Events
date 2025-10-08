@@ -420,71 +420,20 @@
 
   <script>
     // Free Fire themed bundles - Fixed with unique names
-    const bundlesData = [
-      { 
-        id: 1,
-        name: 'Red Criminal Bundle', 
-        image: 'https://via.placeholder.com/260x260/ff0000/ffffff?text=Red+Criminal', 
-        popular: true 
-      },
-      { 
-        id: 2,
-        name: 'Yellow Criminal Bundle', 
-        image: 'https://via.placeholder.com/260x260/ffff00/000000?text=Yellow+Criminal', 
-        popular: true 
-      },
-      { 
-        id: 3,
-        name: 'Cobra Rage Bundle', 
-        image: 'https://via.placeholder.com/260x260/00ff00/ffffff?text=Cobra+Rage', 
-        popular: true 
-      },
-      { 
-        id: 4,
-        name: 'Bushido Bundle', 
-        image: 'https://via.placeholder.com/260x260/0000ff/ffffff?text=Bushido' 
-      },
-      { 
-        id: 5,
-        name: 'Arctic Blue Bundle', 
-        image: 'https://via.placeholder.com/260x260/00ffff/000000?text=Arctic+Blue' 
-      },
-      { 
-        id: 6,
-        name: 'Bunny Ringleader Bundle', 
-        image: 'https://via.placeholder.com/260x260/ff00ff/ffffff?text=Bunny+Ringleader' 
-      },
-      { 
-        id: 7,
-        name: 'Bunny Warrior Bundle', 
-        image: 'https://via.placeholder.com/260x260/ffa500/ffffff?text=Bunny+Warrior' 
-      },
-      { 
-        id: 8,
-        name: 'Galactic Bunny Bundle', 
-        image: 'https://via.placeholder.com/260x260/800080/ffffff?text=Galactic+Bunny' 
-      },
-      { 
-        id: 9,
-        name: 'Genos Suit Bundle', 
-        image: 'https://via.placeholder.com/260x260/008080/ffffff?text=Genos+Suit' 
-      },
-      { 
-        id: 10,
-        name: 'Saitama Bundle', 
-        image: 'https://via.placeholder.com/260x260/ff4500/ffffff?text=Saitama' 
-      },
-      { 
-        id: 11,
-        name: 'The Streets Bundle', 
-        image: 'https://via.placeholder.com/260x260/808080/ffffff?text=The+Streets' 
-      },
-      { 
-        id: 12,
-        name: 'Zombiefied Samurai Bundle', 
-        image: 'https://via.placeholder.com/260x260/4b0082/ffffff?text=Zombie+Samurai' 
-      }
-    ];
+const bundlesData = [
+  { name: 'Red Criminal Bundle', image: '/Red Criminal Bundle.png', popular: true },
+  { name: 'Yellow Criminal Bundle', image: '/Yellow Criminal Bundle.png', popular: true },
+  { name: 'Cobra Rage Bundle', image: '/Cobra Rage Bundle.png', popular: true },
+  { name: 'Bushido Bundle', image: '/Bushido Bundle.png' },
+  { name: 'Artic Blue Bundle', image: '/Artic Blue Bundle.png' },
+  { name: 'Bunny Ringleader Bundle', image: '/Bunny Ringleader Bundle.png' },
+  { name: 'Bunny Warrior Bundle', image: '/Bunny Warrior Bundle.png' },
+  { name: 'Galatic Bunny Bundle', image: '/Galatic Bunny Bundle.png' },
+  { name: 'Genos Suit Bundle', image: '/Genos Suit Bundle.png' },
+  { name: 'Saitama Bundle', image: '/Saitama Bundle.png' },
+  { name: 'The Streets Bundle', image: '/The Streets Bundle.png' },
+  { name: 'Zombiefied Samurai Bundle', image: '/Zombiefied Samurai Bundle.png' }
+];
 
     // Sort: popular first
     const sortedBundles = [...bundlesData].sort((a,b) => (b.popular||0) - (a.popular||0));
