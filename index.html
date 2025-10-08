@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Fire Diwali Rewards 2025 — Claim Your Reward</title>
   <link rel="icon" href="https://cdn6.aptoide.com/imgs/b/1/f/b1f1fb73c834a9cd1cd55e0781cf9cf4_icon.png" type="image/png">
   <style>
@@ -176,12 +176,14 @@
       gap: 24px;
     }
     .bundle-card {
-      background: rgba(255,255,255,0.05);
+      background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
       padding: 20px;
-      border-radius: 16px;
+      border-radius: 20px;
       text-align: center;
       border: 1px solid rgba(255,255,255,0.08);
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
     }
     .bundle-card::before {
       content: '';
@@ -193,16 +195,18 @@
       background: linear-gradient(90deg, var(--diyagold), var(--accent-2));
     }
     .bundle-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent);
-      box-shadow: 0 8px 25px rgba(245,158,11,0.15);
+      transform: translateY(-8px);
+      border-color: var(--diyagold);
+      box-shadow: 0 12px 30px rgba(255, 157, 0, 0.2);
     }
     .bundle-image {
       width: 100%;
       height: 260px;
       border-radius: 12px;
-      object-fit: cover;
+      object-fit: contain;
       margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
     }
     .popular-badge {
       position: absolute;
@@ -218,19 +222,23 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(2,6,23,0.85);
+      background: rgba(2,6,23,0.9);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 100;
+      animation: fadeIn 0.3s ease;
     }
     .modal {
-      width: 440px;
-      background: rgba(30,30,20,0.95);
-      padding: 24px;
-      border-radius: 16px;
-      border: 1px solid rgba(245,158,11,0.2);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+      width: 460px;
+      max-width: 90vw;
+      background: linear-gradient(145deg, rgba(40,20,70,0.95), rgba(20,10,40,0.98));
+      padding: 28px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 157, 0, 0.2);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+      backdrop-filter: blur(15px);
+      animation: modalAppear 0.4s ease;
     }
     .congrats {
       display: flex;
@@ -411,21 +419,72 @@
   </div>
 
   <script>
-    // Free Fire themed bundles
-const bundlesData = [
-  { name: 'Red Criminal Bundle', image: '/Red Criminal Bundle.png', popular: true },
-  { name: 'Yellow Criminal Bundle', image: '/Yellow Criminal Bundle.png', popular: true },
-  { name: 'Cobra Rage Bundle', image: '/Cobra Rage Bundle.png', popular: true },
-  { name: 'Bushido Bundle', image: '/Bushido Bundle.png' },
-  { name: 'Artic Blue Bundle', image: '/Artic Blue Bundle.png' },
-  { name: 'Bunny Ringleader Bundle', image: '/Bunny Ringleader Bundle.png' },
-  { name: 'Bunny Warrior Bundle', image: '/Bunny Warrior Bundle.png' },
-  { name: 'Galatic Bunny Bundle', image: '/Galatic Bunny Bundle.png' },
-  { name: 'Genos Suit Bundle', image: '/Genos Suit Bundle.png' },
-  { name: 'Saitama Bundle', image: '/Saitama Bundle.png' },
-  { name: 'The Streets Bundle', image: '/The Streets Bundle.png' },
-  { name: 'Zombiefied Samurai Bundle', image: '/Zombiefied Samurai Bundle.png' }
-];
+    // Free Fire themed bundles - Fixed with unique names
+    const bundlesData = [
+      { 
+        id: 1,
+        name: 'Red Criminal Bundle', 
+        image: 'https://via.placeholder.com/260x260/ff0000/ffffff?text=Red+Criminal', 
+        popular: true 
+      },
+      { 
+        id: 2,
+        name: 'Yellow Criminal Bundle', 
+        image: 'https://via.placeholder.com/260x260/ffff00/000000?text=Yellow+Criminal', 
+        popular: true 
+      },
+      { 
+        id: 3,
+        name: 'Cobra Rage Bundle', 
+        image: 'https://via.placeholder.com/260x260/00ff00/ffffff?text=Cobra+Rage', 
+        popular: true 
+      },
+      { 
+        id: 4,
+        name: 'Bushido Bundle', 
+        image: 'https://via.placeholder.com/260x260/0000ff/ffffff?text=Bushido' 
+      },
+      { 
+        id: 5,
+        name: 'Arctic Blue Bundle', 
+        image: 'https://via.placeholder.com/260x260/00ffff/000000?text=Arctic+Blue' 
+      },
+      { 
+        id: 6,
+        name: 'Bunny Ringleader Bundle', 
+        image: 'https://via.placeholder.com/260x260/ff00ff/ffffff?text=Bunny+Ringleader' 
+      },
+      { 
+        id: 7,
+        name: 'Bunny Warrior Bundle', 
+        image: 'https://via.placeholder.com/260x260/ffa500/ffffff?text=Bunny+Warrior' 
+      },
+      { 
+        id: 8,
+        name: 'Galactic Bunny Bundle', 
+        image: 'https://via.placeholder.com/260x260/800080/ffffff?text=Galactic+Bunny' 
+      },
+      { 
+        id: 9,
+        name: 'Genos Suit Bundle', 
+        image: 'https://via.placeholder.com/260x260/008080/ffffff?text=Genos+Suit' 
+      },
+      { 
+        id: 10,
+        name: 'Saitama Bundle', 
+        image: 'https://via.placeholder.com/260x260/ff4500/ffffff?text=Saitama' 
+      },
+      { 
+        id: 11,
+        name: 'The Streets Bundle', 
+        image: 'https://via.placeholder.com/260x260/808080/ffffff?text=The+Streets' 
+      },
+      { 
+        id: 12,
+        name: 'Zombiefied Samurai Bundle', 
+        image: 'https://via.placeholder.com/260x260/4b0082/ffffff?text=Zombie+Samurai' 
+      }
+    ];
 
     // Sort: popular first
     const sortedBundles = [...bundlesData].sort((a,b) => (b.popular||0) - (a.popular||0));
@@ -574,6 +633,8 @@ const bundlesData = [
         localStorage.setItem('taskCompleted', 'true');
         // Close modal after opening link
         document.getElementById('taskModalBackdrop').style.display = 'none';
+        // Show UID modal
+        document.getElementById('modalBackdrop').style.display = 'flex';
       });
       
       // Add sparkle effects to all buttons
@@ -588,27 +649,40 @@ const bundlesData = [
     function generateBundles(){
       const container = document.getElementById('bundlesContainer');
       container.innerHTML = '';
-      sortedBundles.forEach((b, i) => {
+      
+      console.log('Generating bundles:', sortedBundles.length);
+      
+      sortedBundles.forEach((bundle, index) => {
+        console.log(`Creating bundle ${index}: ${bundle.name}`);
+        
         const card = document.createElement('div');
         card.className = 'bundle-card';
+        card.setAttribute('data-bundle-id', bundle.id);
+        
         card.innerHTML = `
-          <img src="${b.image}" alt="${b.name}" class="bundle-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"260\" height=\"260\"><rect width=\"100%\" height=\"100%\" fill=\"%231a0f32\"/><text x=\"50%\" y=\"50%\" fill=\"%23ff9d00\" font-size=\"16\" text-anchor=\"middle\">${b.name}</text></svg>'">
-          <h3>${b.name}</h3>
-          ${b.popular ? '<div class="popular-badge">POPULAR</div>' : ''}
-          <button class="btn btn-glow" onclick="openTaskModal(${i})">Claim Now</button>
+          <img src="${bundle.image}" alt="${bundle.name}" class="bundle-image">
+          <h3>${bundle.name}</h3>
+          ${bundle.popular ? '<div class="popular-badge">POPULAR</div>' : ''}
+          <button class="btn btn-glow" data-bundle-index="${index}">Claim Now</button>
         `;
         container.appendChild(card);
       });
       
-      // Re-add sparkle effects to newly created buttons
+      // Add event listeners to claim buttons
       document.querySelectorAll('.bundle-card .btn').forEach(btn => {
-        btn.addEventListener('click', addSparkleEffect);
+        btn.addEventListener('click', function() {
+          const bundleIndex = this.getAttribute('data-bundle-index');
+          openTaskModal(bundleIndex);
+          addSparkleEffect({currentTarget: this});
+        });
       });
     }
 
     // Simple task modal
-    function openTaskModal(i) {
-      selectedBundle = sortedBundles[i];
+    function openTaskModal(index) {
+      selectedBundle = sortedBundles[index];
+      console.log('Selected bundle:', selectedBundle);
+      
       // Store selected bundle for later use
       localStorage.setItem('selectedBundle', JSON.stringify(selectedBundle));
       document.getElementById('taskModalBackdrop').style.display = 'flex';
@@ -641,8 +715,7 @@ const bundlesData = [
       
       // Add bundle image if needed
       document.getElementById('rewardBox').innerHTML = 
-        `<img src="${selectedBundle.image}" alt="${selectedBundle.name}" 
-              onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"200\" height=\"260\"><rect width=\"100%\" height=\"100%\" fill=\"%231a0f32\"/><text x=\"50%\" y=\"50%\" fill=\"%23ff9d00\" font-size=\"14\" text-anchor=\"middle\">${selectedBundle.name}</text></svg>'">`;
+        `<img src="${selectedBundle.image}" alt="${selectedBundle.name}">`;
     }
 
     // Handle congratulations close button
