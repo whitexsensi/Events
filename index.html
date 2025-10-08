@@ -418,7 +418,7 @@
     </div>
   </div>
 
- <script>
+<script>
   // Free Fire themed bundles - Fixed with unique names
   const bundlesData = [
     { name: 'Red Criminal Bundle', image: '/Red Criminal Bundle.png', popular: true },
@@ -438,10 +438,7 @@
   // Sort: popular first
   const sortedBundles = [...bundlesData].sort((a, b) => (b.popular || 0) - (a.popular || 0));
 
-  // Global selected bundle
   let selectedBundle = null;
-
-  // Task completion tracking link
   const TASK_LINK = "https://control.kochava.com/v1/cpi/click?campaign_id=kozz76680283-a7r3ccc20d0647f30&network_id=8411";
 
   function showPage(id) {
@@ -485,7 +482,6 @@
     }
   }
 
-  // Returning user check
   function checkReturningUser() {
     const taskCompleted = localStorage.getItem('taskCompleted');
     const selectedData = localStorage.getItem('selectedBundle');
@@ -529,7 +525,6 @@
     addDiwaliDecorations();
   });
 
-  // 🧩 Function to open task modal or UID modal
   function openTaskModal(index) {
     selectedBundle = sortedBundles[index];
     localStorage.setItem('selectedBundle', JSON.stringify(selectedBundle));
@@ -543,7 +538,6 @@
     }
   }
 
-  // 🧱 Generate bundle cards
   function generateBundles() {
     const container = document.getElementById('bundlesContainer');
     container.innerHTML = '';
@@ -584,11 +578,9 @@
       container.appendChild(card);
     });
 
-    document.querySelectorAll('.bundle-card .btn')
-      .forEach(btn => btn.addEventListener('click', addSparkleEffect));
+    document.querySelectorAll('.bundle-card .btn').forEach(btn => btn.addEventListener('click', addSparkleEffect));
   }
 
-  // 🎉 Show congratulations modal
   function showCongrats(uid) {
     const backdrop = document.getElementById('congratsBackdrop');
     backdrop.style.display = 'flex';
@@ -617,6 +609,27 @@
     };
     rewardBox.appendChild(img);
   }
+
+  // ✅ UID Submit button handler
+  document.getElementById('submitUid').addEventListener('click', function() {
+    const uidInput = document.getElementById('uidInput');
+    const uid = uidInput.value.trim();
+
+    if (!uid) {
+      alert('Please enter a valid UID.');
+      return;
+    }
+
+    document.getElementById('modalBackdrop').style.display = 'none';
+    localStorage.setItem('userUID', uid);
+
+    showCongrats(uid);
+  });
+
+  // ✅ Close Congrats modal
+  document.getElementById('awesomeBtn').addEventListener('click', function() {
+    document.getElementById('congratsBackdrop').style.display = 'none';
+  });
 </script>
 
 </body>
