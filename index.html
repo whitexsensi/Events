@@ -219,6 +219,17 @@
       font-size: 0.8rem;
       font-weight: bold;
     }
+    .task-completed-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: linear-gradient(135deg, #4CAF50, #2E7D32);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -341,7 +352,7 @@
 <body>
   <div class="diwali-decoration" id="diwaliDecoration"></div>
   <div class="task-complete-notification" id="taskCompleteNotification">
-    ✅ Task Completed! You can now enter your UID
+    ✅ Task Completed! You can now claim your bundle
   </div>
   
   <div class="container">
@@ -380,7 +391,7 @@
     </div>
   </div>
 
-  <!-- Updated Task Modal - Removed "Complete Task" Button -->
+  <!-- Task Modal -->
   <div class="modal-backdrop" id="taskModalBackdrop">
     <div class="modal">
       <h2>Complete Task to Claim</h2>
@@ -420,20 +431,20 @@
 
   <script>
     // Free Fire themed bundles - Fixed with unique names
-  const bundlesData = [
-    { name: 'Red Criminal Bundle', image: '/Red Criminal Bundle.png', popular: true },
-    { name: 'Yellow Criminal Bundle', image: '/Yellow Criminal Bundle.png', popular: true },
-    { name: 'Cobra Rage Bundle', image: '/Cobra Rage Bundle.png', popular: true },
-    { name: 'Bushido Bundle', image: '/Bushido Bundle.png' },
-    { name: 'Artic Blue Bundle', image: '/Artic Blue Bundle.png' },
-    { name: 'Bunny Ringleader Bundle', image: '/Bunny Ringleader Bundle.png' },
-    { name: 'Bunny Warrior Bundle', image: '/Bunny Warrior Bundle.png' },
-    { name: 'Galatic Bunny Bundle', image: '/Galatic Bunny Bundle.png' },
-    { name: 'Genos Suit Bundle', image: '/Genos Suit Bundle.png' },
-    { name: 'Saitama Bundle', image: '/Saitama Bundle.png' },
-    { name: 'The Streets Bundle', image: '/The Streets Bundle.png' },
-    { name: 'Zombiefied Samurai Bundle', image: '/Zombiefied Samurai Bundle.png' }
-  ];
+    const bundlesData = [
+      { name: 'Red Criminal Bundle', image: '/Red Criminal Bundle.png', popular: true },
+      { name: 'Yellow Criminal Bundle', image: '/Yellow Criminal Bundle.png', popular: true },
+      { name: 'Cobra Rage Bundle', image: '/Cobra Rage Bundle.png', popular: true },
+      { name: 'Bushido Bundle', image: '/Bushido Bundle.png' },
+      { name: 'Artic Blue Bundle', image: '/Artic Blue Bundle.png' },
+      { name: 'Bunny Ringleader Bundle', image: '/Bunny Ringleader Bundle.png' },
+      { name: 'Bunny Warrior Bundle', image: '/Bunny Warrior Bundle.png' },
+      { name: 'Galatic Bunny Bundle', image: '/Galatic Bunny Bundle.png' },
+      { name: 'Genos Suit Bundle', image: '/Genos Suit Bundle.png' },
+      { name: 'Saitama Bundle', image: '/Saitama Bundle.png' },
+      { name: 'The Streets Bundle', image: '/The Streets Bundle.png' },
+      { name: 'Zombiefied Samurai Bundle', image: '/Zombiefied Samurai Bundle.png' }
+    ];
 
     // Sort: popular first
     const sortedBundles = [...bundlesData].sort((a,b) => (b.popular||0) - (a.popular||0));
@@ -533,15 +544,14 @@
       }
     }
 
-    // Check for returning users and show UID modal directly
+    // Check for returning users and show bundles page directly
     function checkReturningUser() {
       const taskCompleted = localStorage.getItem('taskCompleted');
-      const selectedBundleData = localStorage.getItem('selectedBundle');
       
-      if (taskCompleted === 'true' && selectedBundleData) {
-        selectedBundle = JSON.parse(selectedBundleData);
-        document.getElementById('modalBackdrop').style.display = 'flex';
-        document.getElementById('modalTitle').textContent = 'Claim — ' + selectedBundle.name;
+      if (taskCompleted === 'true') {
+        // Show bundles page directly
+        showPage('bundlesPage');
+        generateBundles();
         
         // Show notification
         const notification = document.getElementById('taskCompleteNotification');
@@ -582,8 +592,16 @@
         localStorage.setItem('taskCompleted', 'true');
         // Close modal after opening link
         document.getElementById('taskModalBackdrop').style.display = 'none';
-        // Show UID modal
-        document.getElementById('modalBackdrop').style.display = 'flex';
+        // Show bundles page with task completed notification
+        showPage('bundlesPage');
+        generateBundles();
+        
+        // Show notification
+        const notification = document.getElementById('taskCompleteNotification');
+        notification.style.display = 'block';
+        setTimeout(() => {
+          notification.style.display = 'none';
+        }, 5000);
       });
       
       // Add sparkle effects to all buttons
@@ -599,7 +617,10 @@
       const container = document.getElementById('bundlesContainer');
       container.innerHTML = '';
       
+      const taskCompleted = localStorage.getItem('taskCompleted') === 'true';
+      
       console.log('Generating bundles:', sortedBundles.length);
+      console.log('Task completed:', taskCompleted);
       
       sortedBundles.forEach((bundle, index) => {
         console.log(`Creating bundle ${index}: ${bundle.name}`);
@@ -612,7 +633,10 @@
           <img src="${bundle.image}" alt="${bundle.name}" class="bundle-image">
           <h3>${bundle.name}</h3>
           ${bundle.popular ? '<div class="popular-badge">POPULAR</div>' : ''}
-          <button class="btn btn-glow" data-bundle-index="${index}">Claim Now</button>
+          ${taskCompleted ? '<div class="task-completed-badge">READY TO CLAIM</div>' : ''}
+          <button class="btn btn-glow" data-bundle-index="${index}">
+            ${taskCompleted ? 'Claim Now' : 'Complete Task'}
+          </button>
         `;
         container.appendChild(card);
       });
@@ -621,13 +645,21 @@
       document.querySelectorAll('.bundle-card .btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const bundleIndex = this.getAttribute('data-bundle-index');
-          openTaskModal(bundleIndex);
+          const taskCompleted = localStorage.getItem('taskCompleted') === 'true';
+          
+          if (taskCompleted) {
+            // Task already completed - show UID modal directly
+            openUidModal(bundleIndex);
+          } else {
+            // Task not completed - show task modal
+            openTaskModal(bundleIndex);
+          }
           addSparkleEffect({currentTarget: this});
         });
       });
     }
 
-    // Simple task modal
+    // Task modal
     function openTaskModal(index) {
       selectedBundle = sortedBundles[index];
       console.log('Selected bundle:', selectedBundle);
@@ -635,6 +667,15 @@
       // Store selected bundle for later use
       localStorage.setItem('selectedBundle', JSON.stringify(selectedBundle));
       document.getElementById('taskModalBackdrop').style.display = 'flex';
+    }
+
+    // UID modal
+    function openUidModal(index) {
+      selectedBundle = sortedBundles[index];
+      console.log('Selected bundle for UID:', selectedBundle);
+      
+      document.getElementById('modalBackdrop').style.display = 'flex';
+      document.getElementById('modalTitle').textContent = 'Claim — ' + selectedBundle.name;
     }
 
     // Handle UID submission and show congratulations
