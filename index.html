@@ -418,317 +418,206 @@
     </div>
   </div>
 
-  <script>
-    // Free Fire themed bundles - Fixed with unique names
-    const bundlesData = [
-      { 
-        id: 1,
-        name: 'Red Criminal Bundle', 
-        image: 'https://via.placeholder.com/260x260/ff0000/ffffff?text=Red+Criminal', 
-        popular: true 
-      },
-      { 
-        id: 2,
-        name: 'Yellow Criminal Bundle', 
-        image: 'https://via.placeholder.com/260x260/ffff00/000000?text=Yellow+Criminal', 
-        popular: true 
-      },
-      { 
-        id: 3,
-        name: 'Cobra Rage Bundle', 
-        image: 'https://via.placeholder.com/260x260/00ff00/ffffff?text=Cobra+Rage', 
-        popular: true 
-      },
-      { 
-        id: 4,
-        name: 'Bushido Bundle', 
-        image: 'https://via.placeholder.com/260x260/0000ff/ffffff?text=Bushido' 
-      },
-      { 
-        id: 5,
-        name: 'Arctic Blue Bundle', 
-        image: 'https://via.placeholder.com/260x260/00ffff/000000?text=Arctic+Blue' 
-      },
-      { 
-        id: 6,
-        name: 'Bunny Ringleader Bundle', 
-        image: 'https://via.placeholder.com/260x260/ff00ff/ffffff?text=Bunny+Ringleader' 
-      },
-      { 
-        id: 7,
-        name: 'Bunny Warrior Bundle', 
-        image: 'https://via.placeholder.com/260x260/ffa500/ffffff?text=Bunny+Warrior' 
-      },
-      { 
-        id: 8,
-        name: 'Galactic Bunny Bundle', 
-        image: 'https://via.placeholder.com/260x260/800080/ffffff?text=Galactic+Bunny' 
-      },
-      { 
-        id: 9,
-        name: 'Genos Suit Bundle', 
-        image: 'https://via.placeholder.com/260x260/008080/ffffff?text=Genos+Suit' 
-      },
-      { 
-        id: 10,
-        name: 'Saitama Bundle', 
-        image: 'https://via.placeholder.com/260x260/ff4500/ffffff?text=Saitama' 
-      },
-      { 
-        id: 11,
-        name: 'The Streets Bundle', 
-        image: 'https://via.placeholder.com/260x260/808080/ffffff?text=The+Streets' 
-      },
-      { 
-        id: 12,
-        name: 'Zombiefied Samurai Bundle', 
-        image: 'https://via.placeholder.com/260x260/4b0082/ffffff?text=Zombie+Samurai' 
-      }
-    ];
+ <script>
+  // Free Fire themed bundles - Fixed with unique names
+  const bundlesData = [
+    { name: 'Red Criminal Bundle', image: '/Red Criminal Bundle.png', popular: true },
+    { name: 'Yellow Criminal Bundle', image: '/Yellow Criminal Bundle.png', popular: true },
+    { name: 'Cobra Rage Bundle', image: '/Cobra Rage Bundle.png', popular: true },
+    { name: 'Bushido Bundle', image: '/Bushido Bundle.png' },
+    { name: 'Artic Blue Bundle', image: '/Artic Blue Bundle.png' },
+    { name: 'Bunny Ringleader Bundle', image: '/Bunny Ringleader Bundle.png' },
+    { name: 'Bunny Warrior Bundle', image: '/Bunny Warrior Bundle.png' },
+    { name: 'Galatic Bunny Bundle', image: '/Galatic Bunny Bundle.png' },
+    { name: 'Genos Suit Bundle', image: '/Genos Suit Bundle.png' },
+    { name: 'Saitama Bundle', image: '/Saitama Bundle.png' },
+    { name: 'The Streets Bundle', image: '/The Streets Bundle.png' },
+    { name: 'Zombiefied Samurai Bundle', image: '/Zombiefied Samurai Bundle.png' }
+  ];
 
-    // Sort: popular first
-    const sortedBundles = [...bundlesData].sort((a,b) => (b.popular||0) - (a.popular||0));
+  // Sort: popular first
+  const sortedBundles = [...bundlesData].sort((a, b) => (b.popular || 0) - (a.popular || 0));
 
-    // Track selected bundle globally
-    let selectedBundle = null;
+  // Global selected bundle
+  let selectedBundle = null;
 
-    // Task completion tracking
-    const TASK_LINK = "https://control.kochava.com/v1/cpi/click?campaign_id=kozz76680283-a7r3ccc20d0647f30&network_id=8411";
+  // Task completion tracking link
+  const TASK_LINK = "https://control.kochava.com/v1/cpi/click?campaign_id=kozz76680283-a7r3ccc20d0647f30&network_id=8411";
 
-    function showPage(id){
-      document.querySelectorAll('.page').forEach(p => {
-        p.classList.remove('active');
-      });
-      document.getElementById(id).classList.add('active');
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  // Sparkle effect
+  function addSparkleEffect(event) {
+    const button = event.currentTarget;
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    const rect = button.getBoundingClientRect();
+    sparkle.style.left = (event.clientX - rect.left) + 'px';
+    sparkle.style.top = (event.clientY - rect.top) + 'px';
+    button.appendChild(sparkle);
+    setTimeout(() => sparkle.style.opacity = '1', 10);
+    setTimeout(() => {
+      sparkle.style.opacity = '0';
+      sparkle.style.transform = 'scale(0)';
+    }, 600);
+    setTimeout(() => button.removeChild(sparkle), 1000);
+  }
+
+  // Diwali decorations
+  function addDiwaliDecorations() {
+    const container = document.getElementById('diwaliDecoration');
+    const colors = ['#ff9d00', '#ff5e00', '#ffc107', '#7e57c2', '#ffffff'];
+    for (let i = 0; i < 15; i++) {
+      const decor = document.createElement('div');
+      decor.className = 'decoration-item';
+      decor.style.left = Math.random() * 100 + '%';
+      decor.style.top = Math.random() * 100 + '%';
+      const size = Math.random() * 30 + 10;
+      decor.style.width = decor.style.height = size + 'px';
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      decor.style.backgroundColor = color;
+      decor.style.borderRadius = '50%';
+      decor.style.opacity = Math.random() * 0.4 + 0.1;
+      container.appendChild(decor);
     }
+  }
 
-    // Add sparkle effect to buttons when clicked
-    function addSparkleEffect(event) {
-      const button = event.currentTarget;
-      const sparkle = document.createElement('div');
-      sparkle.className = 'sparkle';
-      
-      const rect = button.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      
-      sparkle.style.left = x + 'px';
-      sparkle.style.top = y + 'px';
-      
-      button.appendChild(sparkle);
-      
-      // Animate sparkle
-      setTimeout(() => {
-        sparkle.style.opacity = '1';
-        sparkle.style.transform = 'scale(2)';
-      }, 10);
-      
-      setTimeout(() => {
-        sparkle.style.opacity = '0';
-        sparkle.style.transform = 'scale(0)';
-      }, 600);
-      
-      setTimeout(() => {
-        if (button.contains(sparkle)) {
-          button.removeChild(sparkle);
-        }
-      }, 1000);
+  // Returning user check
+  function checkReturningUser() {
+    const taskCompleted = localStorage.getItem('taskCompleted');
+    const selectedData = localStorage.getItem('selectedBundle');
+    if (taskCompleted === 'true' && selectedData) {
+      selectedBundle = JSON.parse(selectedData);
+      document.getElementById('modalBackdrop').style.display = 'flex';
+      document.getElementById('modalTitle').textContent = 'Claim — ' + selectedBundle.name;
+      const notification = document.getElementById('taskCompleteNotification');
+      notification.style.display = 'block';
+      setTimeout(() => notification.style.display = 'none', 5000);
     }
+  }
 
-    // Add Diwali decorations
-    function addDiwaliDecorations() {
-      const decorationContainer = document.getElementById('diwaliDecoration');
-      const colors = ['#ff9d00', '#ff5e00', '#ffc107', '#7e57c2', '#ffffff'];
-      
-      for (let i = 0; i < 15; i++) {
-        const decor = document.createElement('div');
-        decor.className = 'decoration-item';
-        
-        // Random position
-        const left = Math.random() * 100;
-        const top = Math.random() * 100;
-        
-        // Random size
-        const size = Math.random() * 30 + 10;
-        
-        // Random shape (diya, star, or circle)
-        const shapeType = Math.floor(Math.random() * 3);
-        
-        decor.style.left = left + '%';
-        decor.style.top = top + '%';
-        decor.style.width = size + 'px';
-        decor.style.height = size + 'px';
-        
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        
-        if (shapeType === 0) {
-          // Diya shape
-          decor.style.backgroundColor = color;
-          decor.style.borderRadius = '50% 50% 30% 30%';
-          decor.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
-        } else if (shapeType === 1) {
-          // Star shape
-          decor.style.backgroundColor = 'transparent';
-          decor.style.borderLeft = (size/2) + 'px solid transparent';
-          decor.style.borderRight = (size/2) + 'px solid transparent';
-          decor.style.borderBottom = size + 'px solid ' + color;
-          decor.style.clipPath = 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
-        } else {
-          // Circle
-          decor.style.backgroundColor = color;
-          decor.style.borderRadius = '50%';
-        }
-        
-        decor.style.opacity = Math.random() * 0.4 + 0.1;
-        decorationContainer.appendChild(decor);
-      }
-    }
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('imageInput');
+    const preview = document.getElementById('preview');
+    const continueBtn = document.getElementById('continueBtn');
 
-    // Check for returning users and show UID modal directly
-    function checkReturningUser() {
-      const taskCompleted = localStorage.getItem('taskCompleted');
-      const selectedBundleData = localStorage.getItem('selectedBundle');
-      
-      if (taskCompleted === 'true' && selectedBundleData) {
-        selectedBundle = JSON.parse(selectedBundleData);
-        document.getElementById('modalBackdrop').style.display = 'flex';
-        document.getElementById('modalTitle').textContent = 'Claim — ' + selectedBundle.name;
-        
-        // Show notification
-        const notification = document.getElementById('taskCompleteNotification');
-        notification.style.display = 'block';
-        setTimeout(() => {
-          notification.style.display = 'none';
-        }, 5000);
-      }
-    }
+    checkReturningUser();
+    document.getElementById('dropZone').addEventListener('click', () => input.click());
 
-    // Initialize event listeners and decorations when DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      const input = document.getElementById('imageInput');
-      const preview = document.getElementById('preview');
-      const continueBtn = document.getElementById('continueBtn');
-      
-      // Check for returning users on page load
-      checkReturningUser();
-      
-      document.getElementById('dropZone').addEventListener('click', () => input.click());
-      
-      input.addEventListener('change', () => {
-        const file = input.files[0];
-        if (!file) return;
-        preview.src = URL.createObjectURL(file);
-        continueBtn.disabled = false;
-      });
-      
-      continueBtn.addEventListener('click', () => {
-        showPage('bundlesPage');
-        generateBundles();
-      });
-      
-      // Updated task link button - opens link and closes modal
-      document.getElementById('openTaskLink').addEventListener('click', function() {
-        window.open(TASK_LINK, '_blank');
-        // Mark task as completed in localStorage
-        localStorage.setItem('taskCompleted', 'true');
-        // Close modal after opening link
-        document.getElementById('taskModalBackdrop').style.display = 'none';
-        // Show UID modal
-        document.getElementById('modalBackdrop').style.display = 'flex';
-      });
-      
-      // Add sparkle effects to all buttons
-      document.querySelectorAll('.btn').forEach(btn => {
-        btn.addEventListener('click', addSparkleEffect);
-      });
-      
-      // Add Diwali decorations
-      addDiwaliDecorations();
+    input.addEventListener('change', () => {
+      const file = input.files[0];
+      if (!file) return;
+      preview.src = URL.createObjectURL(file);
+      continueBtn.disabled = false;
     });
 
-    function generateBundles(){
-      const container = document.getElementById('bundlesContainer');
-      container.innerHTML = '';
-      
-      console.log('Generating bundles:', sortedBundles.length);
-      
-      sortedBundles.forEach((bundle, index) => {
-        console.log(`Creating bundle ${index}: ${bundle.name}`);
-        
-        const card = document.createElement('div');
-        card.className = 'bundle-card';
-        card.setAttribute('data-bundle-id', bundle.id);
-        
-        card.innerHTML = `
-          <img src="${bundle.image}" alt="${bundle.name}" class="bundle-image">
-          <h3>${bundle.name}</h3>
-          ${bundle.popular ? '<div class="popular-badge">POPULAR</div>' : ''}
-          <button class="btn btn-glow" data-bundle-index="${index}">Claim Now</button>
-        `;
-        container.appendChild(card);
-      });
-      
-      // Add event listeners to claim buttons
-      document.querySelectorAll('.bundle-card .btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const bundleIndex = this.getAttribute('data-bundle-index');
-          openTaskModal(bundleIndex);
-          addSparkleEffect({currentTarget: this});
-        });
-      });
-    }
+    continueBtn.addEventListener('click', () => {
+      showPage('bundlesPage');
+      generateBundles();
+    });
 
-    // Simple task modal
-    function openTaskModal(index) {
-      selectedBundle = sortedBundles[index];
-      console.log('Selected bundle:', selectedBundle);
-      
-      // Store selected bundle for later use
-      localStorage.setItem('selectedBundle', JSON.stringify(selectedBundle));
+    document.getElementById('openTaskLink').addEventListener('click', function () {
+      window.open(TASK_LINK, '_blank');
+      localStorage.setItem('taskCompleted', 'true');
+      document.getElementById('taskModalBackdrop').style.display = 'none';
+    });
+
+    document.querySelectorAll('.btn').forEach(btn => btn.addEventListener('click', addSparkleEffect));
+    addDiwaliDecorations();
+  });
+
+  // 🧩 Function to open task modal or UID modal
+  function openTaskModal(index) {
+    selectedBundle = sortedBundles[index];
+    localStorage.setItem('selectedBundle', JSON.stringify(selectedBundle));
+
+    const taskDone = localStorage.getItem('taskCompleted');
+    if (taskDone === 'true') {
+      document.getElementById('modalBackdrop').style.display = 'flex';
+      document.getElementById('modalTitle').textContent = 'Claim — ' + selectedBundle.name;
+    } else {
       document.getElementById('taskModalBackdrop').style.display = 'flex';
     }
+  }
 
-    // Handle UID submission and show congratulations
-    document.getElementById('submitUid').addEventListener('click', () => {
-      const uid = document.getElementById('uidInput').value.trim();
-      if (!/^[0-9]{5,12}$/.test(uid)) {
-        alert('Please enter a valid Free Fire UID (5-12 digits)');
-        return;
+  // 🧱 Generate bundle cards
+  function generateBundles() {
+    const container = document.getElementById('bundlesContainer');
+    container.innerHTML = '';
+
+    sortedBundles.forEach((b, i) => {
+      const card = document.createElement('div');
+      card.className = 'bundle-card';
+
+      const img = document.createElement('img');
+      img.src = b.image;
+      img.alt = b.name;
+      img.className = 'bundle-image';
+      img.onerror = () => {
+        const svg = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="260" height="260">
+            <rect width="100%" height="100%" fill="%231a0f32"/>
+            <text x="50%" y="50%" fill="%23ff9d00" font-size="16" text-anchor="middle">${b.name}</text>
+          </svg>`;
+        img.src = `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+      };
+
+      const title = document.createElement('h3');
+      title.textContent = b.name;
+
+      const button = document.createElement('button');
+      button.className = 'btn btn-glow';
+      button.textContent = 'Claim Now';
+      button.onclick = () => openTaskModal(i);
+
+      if (b.popular) {
+        const badge = document.createElement('div');
+        badge.className = 'popular-badge';
+        badge.textContent = 'POPULAR';
+        card.appendChild(badge);
       }
-      document.getElementById('modalBackdrop').style.display = 'none';
-      
-      // Clear task completion data
-      localStorage.removeItem('taskCompleted');
-      localStorage.removeItem('selectedBundle');
-      
-      showCongrats(uid);
+
+      card.append(img, title, button);
+      container.appendChild(card);
     });
 
-    // Fixed congratulations function
-    function showCongrats(uid) {
-      // Ensure congratulations modal displays properly
-      document.getElementById('congratsBackdrop').style.display = 'flex';
-      
-      // Update all congratulation elements
-      document.getElementById('rewardName').textContent = selectedBundle.name;
-      document.getElementById('rewardMsg').textContent = `Bundle "${selectedBundle.name}" has been successfully sent to UID: ${uid}`;
-      
-      // Add bundle image if needed
-      document.getElementById('rewardBox').innerHTML = 
-        `<img src="${selectedBundle.image}" alt="${selectedBundle.name}">`;
-    }
+    document.querySelectorAll('.bundle-card .btn')
+      .forEach(btn => btn.addEventListener('click', addSparkleEffect));
+  }
 
-    // Handle congratulations close button
-    document.getElementById('awesomeBtn').addEventListener('click', () => {
-      document.getElementById('congratsBackdrop').style.display = 'none';
-      // Reset flow
-      showPage('uploadPage');
-      // Clear any input fields
-      document.getElementById('uidInput').value = '';
-      document.getElementById('imageInput').value = '';
-      document.getElementById('preview').src = 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'720\' height=\'480\'><rect width=\'100%\' height=\'100%\' fill=\'%231a0f32\'/><text x=\'50%\' y=\'50%\' fill=\'%23ff9d00\' font-size=\'20\' text-anchor=\'middle\'>Click to upload image</text></svg>';
-      document.getElementById('continueBtn').disabled = true;
-    });
-  </script>
+  // 🎉 Show congratulations modal
+  function showCongrats(uid) {
+    const backdrop = document.getElementById('congratsBackdrop');
+    backdrop.style.display = 'flex';
+
+    const rewardName = document.getElementById('rewardName');
+    const rewardMsg = document.getElementById('rewardMsg');
+    const rewardBox = document.getElementById('rewardBox');
+
+    rewardName.textContent = selectedBundle.name;
+    rewardMsg.textContent = `Bundle "${selectedBundle.name}" has been successfully sent to UID: ${uid}`;
+
+    rewardBox.innerHTML = '';
+
+    const img = document.createElement('img');
+    img.src = selectedBundle.image;
+    img.alt = selectedBundle.name;
+    img.width = 200;
+    img.height = 260;
+    img.onerror = () => {
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="260">
+          <rect width="100%" height="100%" fill="%231a0f32"/>
+          <text x="50%" y="50%" fill="%23ff9d00" font-size="14" text-anchor="middle">${selectedBundle.name}</text>
+        </svg>`;
+      img.src = `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+    };
+    rewardBox.appendChild(img);
+  }
+</script>
+
 </body>
 </html>
